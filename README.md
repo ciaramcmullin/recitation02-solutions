@@ -34,64 +34,73 @@ Some of these exercises have multiple ways to solve them.
 ```
 
 ```
-    wget http://nginx.org/download/nginx-1.9.2.tar.gz
+    wget https://raw.githubusercontent.com/torvalds/linux/master/kernel/reboot.c
 ```
 
 ```
-    tar -xvf nginx-1.9.2.tar.gz
+    wc reboot.c
 ```
-
-```
-    grep -r "main(" nginx-1.9.2 (or just grep -r "main(" assuming you are in nginx-1.9.2)
-
-    OR
-
-    find . -name '*.c' | xargs grep "main("
-```
-And by inspection, the file is nginx-1.9.2/src/core/nginx.c
-
-```
-    wc -l nginx-1.9.2/src/core/nginx.c 
-```  
-And there are 1362 lines.
+There are 584 lines and 14176 characters.
 
 ---
 
 ## C Programming  
 
-### Part 1  
-```
-    int findMax(int a, int b)
-    {
-        if (a > b)
-            return a;
-        else
-            return b;    
-    } 
-``` 
-
-### Part 2  
-```
-    int fib(int n) 
-    {
-        if (n <= 1)
-            return n;
-        else {
-            return fib(n - 1) + fib(n - 2);
-        }
-    }
-``` 
-
-### Part 3  
+### Staircase
 ```c
+void staircase(int n) {
+	if(n <= 0)
+	    return;
+	int i, j;
+	for (i = 0; i < n; ++i) {
+	    for (j = n; j > i+1; j--) {
+	        printf(" ");
+	    }
+	    for (; j > 0; j--){
+	        printf("#");
+	    }
+	    printf("\n");     
+	}
+}
+```
 
-    int sum = 0;
-    for (i = 0 ; i < size ; i++) {
-        sum += a[i];
+### Kangaroo
+```c
+char* kangaroo(int x1, int v1, int x2, int v2) {
+    if(v1 == v2){
+        if(x1 != x2)
+            return "NO";
+        return "YES";
     }
+    if((x1-x2)%(v2-v1) == 0 && (x1-x2)*(v2-v1) >= 0)
+        return "YES";
+    return "NO";
+}
+```
 
-``` 
+### Sum of even and odd
+```c
+int sum_of_even(int a_size, int* a) {
+    int ret = 0;
+    for(int i=0; i < a_size; ++i)
+        ret += ( (a[i] & 1) ? 0 : a[i]);
+    return ret;
+}
 
+int sum_of_odd(int a_size, int* a) {
+    int ret = 0;
+    for(int i=0; i < a_size; ++i)
+        ret += ( (a[i] & 1) ? a[i] : 0);
+    return ret;
+}
+```
+
+### Find max of 2
+```c
+int find_max(int n1, int n2) {
+    return ((n1 > n2) ? n1 : n2);
+}
+```
 ---
 
 ## Debugging
